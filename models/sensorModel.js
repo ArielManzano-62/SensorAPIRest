@@ -7,17 +7,25 @@ const sensorSchema = new mongoose.Schema({
 		unique: true,
 	},
 	location: {
-		// GeoJSON
 		type: {
 			type: String,
 			default: 'Point',
 			enum: ['Point'],
 		},
-		coordinates: [Number],
+		lat: {
+			type: Number,
+			default: 0,
+		},
+		lng: {
+			type: Number,
+			default: 0,
+		},
 	},
 	active: Boolean,
 	minVal: Number,
 	maxVal: Number,
 })
 
-module.exports = sensorSchema
+const Sensor = mongoose.model('Sensor', sensorSchema)
+
+module.exports = Sensor
