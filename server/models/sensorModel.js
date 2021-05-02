@@ -12,18 +12,18 @@ const sensorSchema = new mongoose.Schema({
 			default: 'Point',
 			enum: ['Point'],
 		},
-		lat: {
+		latitude: {
 			type: Number,
 			default: 0,
 		},
-		lng: {
+		longitude: {
 			type: Number,
 			default: 0,
 		},
 	},
 	active: Boolean,
-	minVal: Number,
-	maxVal: Number,
+	valueMin: Number,
+	valueMax: Number,
 })
 
 const Sensor = mongoose.model('Sensor', sensorSchema)
