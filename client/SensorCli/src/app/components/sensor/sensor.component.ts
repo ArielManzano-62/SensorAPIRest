@@ -12,7 +12,6 @@ import { SensorService } from 'src/app/api/sensor.service';
 export class SensorComponent implements OnInit {
   constructor(private sensorService: SensorService) {}
   sensors: Sensor[] = [];
-  sensorEvents: any[] = [];
 
   ngOnInit(): void {
     this.sensorService.getSensors().subscribe(
@@ -42,15 +41,6 @@ export class SensorComponent implements OnInit {
 
     this.sensorForm.setControl('valueMax', new FormControl(sensor.valueMax));
     this.sensorForm.setControl('valueMin', new FormControl(sensor.valueMin));
-
-    this.sensorService.getEvents(sensor._id).subscribe(
-      (data) => {
-        this.sensorEvents = data.data.sensorEvents;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   }
 
   sensorForm = initSensorForm();

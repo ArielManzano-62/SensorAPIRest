@@ -51,7 +51,7 @@
               <div class="col">
                 <input
                   type="number"
-                  placeholder="Máximo valor"
+                  placeholder="Maximum value"
                   class="form-control"
                   formControlName="valueMax"
                 />
@@ -59,7 +59,7 @@
               <div class="col">
                 <input
                   type="number"
-                  placeholder="Mínimo valor"
+                  placeholder="Minimum value"
                   class="form-control"
                   formControlName="valueMin"
                 />
@@ -101,19 +101,10 @@
       </div>
     </div>
     <div class="col-lg-6 mt-4" *ngIf="sensorSelected._id !== ''">
-      <div class="card">
-        <div class="card-body">
-          <h5>Events</h5>
-          <ul class="list-group">
-            <li
-              *ngFor="let sensorEvent of sensorEvents"
-              class="list-group-item list-group-item-action"
-            >
-              {{ sensorEvent.createdAt }} - {{ sensorEvent.value }}
-            </li>
-          </ul>
-        </div>
-      </div>
+      <app-sensor-event
+        [sensorId]="sensorSelected._id"
+        [sensorName]="sensorSelected.name"
+      ></app-sensor-event>
     </div>
   </div>
 </div>

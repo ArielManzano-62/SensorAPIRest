@@ -1,3 +1,4 @@
+const SensorEvent = require('../models/sensorEventModel')
 const Sensor = require('../models/sensorModel')
 
 exports.getAllSensors = async (req, res) => {
@@ -61,6 +62,7 @@ exports.updateSensor = async (req, res) => {
 exports.deleteSensor = async (req, res) => {
 	try {
 		await Sensor.findByIdAndDelete(req.params.id)
+		await SensorEvent.deleteMany({ sensor: req.params.id })
 
 		res.status(204).json({
 			status: 'success',

@@ -28,4 +28,8 @@ export class SensorService {
   getEvents(sensorId: string): Observable<any> {
     return this.http.get(`${baseURL}/sensors/${sensorId}/event`);
   }
+
+  sendEvent(value: number, sensorId: string): Observable<any> {
+    return this.http.post(`${baseURL}/sensors/${sensorId}/event`, { value });
+  }
 }

@@ -1,25 +1,27 @@
 {
-  "name": "sensorapirest",
-  "version": "1.0.0",
-  "description": "��#\u0000 \u0000S\u0000e\u0000n\u0000s\u0000o\u0000r\u0000A\u0000P\u0000I\u0000R\u0000e\u0000s\u0000t\u0000\r\u0000 \u0000",
-  "main": "index.js",
-  "scripts": {
-    "test": "npm test"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ArielManzano-62/SensorAPIRest.git"
-  },
-  "author": "Ariel Manzano",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ArielManzano-62/SensorAPIRest/issues"
-  },
-  "homepage": "https://github.com/ArielManzano-62/SensorAPIRest#readme",
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.12.7"
-  }
+	"name": "sensorapirest",
+	"version": "1.0.0",
+	"description": "��#\u0000 \u0000S\u0000e\u0000n\u0000s\u0000o\u0000r\u0000A\u0000P\u0000I\u0000R\u0000e\u0000s\u0000t\u0000\r\u0000 \u0000",
+	"main": "index.js",
+	"scripts": {
+		"test": "npm test",
+		"dev": "nodemon server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ArielManzano-62/SensorAPIRest.git"
+	},
+	"author": "Ariel Manzano",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ArielManzano-62/SensorAPIRest/issues"
+	},
+	"homepage": "https://github.com/ArielManzano-62/SensorAPIRest#readme",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^8.2.0",
+		"express": "^4.17.1",
+		"mongoose": "^5.12.7",
+		"morgan": "^1.10.0"
+	}
 }

@@ -10,7 +10,7 @@ router.route('/:id').patch(sensorController.updateSensor).delete(sensorControlle
 
 router
 	.route('/:sensorId/event')
-	.post(sensorEventController.setSensorId, sensorEventController.createSensorEvent)
+	.post(sensorEventController.setSensorId, sensorEventController.validateValue, sensorEventController.createSensorEvent)
 	.get(sensorEventController.setSensorId, sensorEventController.getAllSensorEvents)
 
 module.exports = router

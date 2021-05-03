@@ -1,4 +1,5 @@
 const SensorEvent = require('../models/sensorEventModel')
+const Sensor = require('../models/sensorModel')
 
 exports.setSensorId = (req, res, next) => {
 	if (!req.body.sensor) req.body.sensor = req.params.sensorId
@@ -22,6 +23,18 @@ exports.getAllSensorEvents = async (req, res) => {
 			message: err,
 		})
 	}
+}
+
+exports.validateValue = async (req, res, next) => {
+	const sensor = await Sensor.findById(req.params.sensorId)
+	if (sensor && (sensor.valueMin > req.body.value || sensor.valueMax < req.body.value)) {
+		res.status(400).json({
+			status: 'fail',
+			message: `El valor debe ser entre los valores: [${sensor.valueMin} - ${sensor.valueMax}]`,
+		})
+		next(new Error())
+	}
+	next()
 }
 
 exports.createSensorEvent = async (req, res) => {
