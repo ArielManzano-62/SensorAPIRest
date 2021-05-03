@@ -8,6 +8,8 @@ import { AppSidebarComponent } from './components/app-sidebar/app-sidebar.compon
 import { StoreModule } from '@ngrx/store';
 import { SensorEventComponent } from './components/sensor-event/sensor-event.component';
 import { SensorComponent } from './components/sensor/sensor.component';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { SensorComponent } from './components/sensor/sensor.component';
     ReactiveFormsModule,
     FormsModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    CommonModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
