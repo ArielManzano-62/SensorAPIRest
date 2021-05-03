@@ -20,7 +20,12 @@
               placeholder="Name"
               class="form-control"
               formControlName="name"
+              [class.is-invalid]="validateInput('name')"
+              required
             />
+            <div *ngIf="validateInput('name')" class="invalid-feedback">
+              Required
+            </div>
           </div>
 
           <div class="form-group" formGroupName="location">
@@ -32,7 +37,15 @@
                   placeholder="Latitude"
                   class="form-control"
                   formControlName="latitude"
+                  [class.is-invalid]="validateInput('location.latitude')"
+                  required
                 />
+                <div
+                  *ngIf="validateInput('location.latitude')"
+                  class="invalid-feedback"
+                >
+                  Required
+                </div>
               </div>
               <div class="col">
                 <input
@@ -40,7 +53,15 @@
                   placeholder="Longitude"
                   class="form-control"
                   formControlName="longitude"
+                  [class.is-invalid]="validateInput('location.longitude')"
+                  required
                 />
+                <div
+                  *ngIf="validateInput('location.longitude')"
+                  class="invalid-feedback"
+                >
+                  Required
+                </div>
               </div>
             </div>
           </div>
@@ -54,7 +75,17 @@
                   placeholder="Maximum value"
                   class="form-control"
                   formControlName="valueMax"
+                  [class.is-invalid]="
+                    validateInput('valueMax') || validateRangeValue()
+                  "
+                  required
                 />
+                <div *ngIf="validateInput('valueMax')" class="invalid-feedback">
+                  Required
+                </div>
+                <div *ngIf="validateRangeValue()" class="invalid-feedback">
+                  Range value invalid
+                </div>
               </div>
               <div class="col">
                 <input
@@ -62,9 +93,28 @@
                   placeholder="Minimum value"
                   class="form-control"
                   formControlName="valueMin"
+                  [class.is-invalid]="
+                    validateInput('valueMin') || validateRangeValue()
+                  "
+                  required
                 />
+                <div *ngIf="validateInput('valueMin')" class="invalid-feedback">
+                  Required
+                </div>
+                <div *ngIf="validateRangeValue()" class="invalid-feedback">
+                  Range value invalid
+                </div>
               </div>
             </div>
+          </div>
+
+          <div class="form-group form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              formControlName="active"
+            />
+            <label class="form-check-label">Active</label>
           </div>
 
           <div class="d-flex justify-content-around">
@@ -94,6 +144,8 @@
             class="list-group-item list-group-item-action"
             (click)="onSelected(sensor)"
             [class.active]="sensor._id === sensorSelected._id"
+            [class.text-white]="!sensor.active"
+            [class.bg-danger]="!sensor.active"
           >
             {{ sensor.name }}
           </li>

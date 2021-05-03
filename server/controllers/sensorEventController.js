@@ -27,6 +27,13 @@ exports.getAllSensorEvents = async (req, res) => {
 
 exports.validateValue = async (req, res, next) => {
 	const sensor = await Sensor.findById(req.params.sensorId)
+	if (sensor && !sensor.active) {
+		res.status(400).json({
+			status: 'fail',
+			message: 'Sensor no activo',
+		})
+		next(new Error())
+	}
 	if (sensor && (sensor.valueMin > req.body.value || sensor.valueMax < req.body.value)) {
 		res.status(400).json({
 			status: 'fail',

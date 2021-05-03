@@ -4,6 +4,7 @@ export class Sensor {
   location: Location = new Location();
   valueMax: number = 0;
   valueMin: number = 0;
+  active: boolean = true;
 }
 
 class Location {
