@@ -7,7 +7,7 @@ exports.setSensorId = (req, res, next) => {
 
 exports.getAllSensorEvents = async (req, res) => {
 	try {
-		const sensorEvents = await SensorEvent.find()
+		const sensorEvents = await SensorEvent.find({ sensor: req.body.sensor })
 
 		res.status(200).json({
 			status: 'success',

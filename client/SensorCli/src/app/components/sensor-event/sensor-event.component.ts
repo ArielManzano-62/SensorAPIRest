@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sensor-event',
   templateUrl: './sensor-event.component.html',
-  styleUrls: ['./sensor-event.component.css']
+  styleUrls: ['./sensor-event.component.css'],
 })
 export class SensorEventComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
+  @Input() sensorEvent: any;
 }

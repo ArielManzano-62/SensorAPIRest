@@ -1,13 +1,18 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
       <div class="card mt-4">
         <form
           class="card-body"
           [formGroup]="sensorForm"
           (ngSubmit)="onSubmit()"
         >
-          <h5 class="card-title">Insert a new sensor.</h5>
+          <h5 class="card-title" *ngIf="sensorSelected._id === ''">
+            Insert a new sensor.
+          </h5>
+          <h5 class="card-title" *ngIf="sensorSelected._id !== ''">
+            Update a sensor.
+          </h5>
           <div class="form-group">
             <p>Name</p>
             <input
@@ -62,7 +67,24 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="d-flex justify-content-around">
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+            <input
+              type="button"
+              *ngIf="sensorSelected._id !== ''"
+              (click)="onDelete()"
+              class="btn btn-danger"
+              value="Delete"
+            />
+
+            <input
+              type="button"
+              (click)="onClear()"
+              class="btn btn-secondary"
+              value="Clear"
+            />
+          </div>
         </form>
       </div>
       <div class="mt-4">
@@ -77,10 +99,21 @@
           </li>
         </ul>
       </div>
-      <!-- 
-      <div *ngFor="let sensor of sensors$ | async">
-        <p>Sensor Id: {{ sensor.id }} | Name: {{ sensor.name }}</p>
-      </div> -->
+    </div>
+    <div class="col-lg-6 mt-4" *ngIf="sensorSelected._id !== ''">
+      <div class="card">
+        <div class="card-body">
+          <h5>Events</h5>
+          <ul class="list-group">
+            <li
+              *ngFor="let sensorEvent of sensorEvents"
+              class="list-group-item list-group-item-action"
+            >
+              {{ sensorEvent.createdAt }} - {{ sensorEvent.value }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

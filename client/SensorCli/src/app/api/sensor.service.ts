@@ -20,4 +20,12 @@ export class SensorService {
   updateSensor(sensor: any): Observable<any> {
     return this.http.patch(`${baseURL}/sensors/${sensor.id}`, sensor);
   }
+
+  deleteSensor(id: string): Observable<any> {
+    return this.http.delete(`${baseURL}/sensors/${id}`);
+  }
+
+  getEvents(sensorId: string): Observable<any> {
+    return this.http.get(`${baseURL}/sensors/${sensorId}/event`);
+  }
 }

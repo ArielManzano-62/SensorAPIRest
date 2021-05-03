@@ -12,6 +12,7 @@ import { SensorService } from 'src/app/api/sensor.service';
 export class SensorComponent implements OnInit {
   constructor(private sensorService: SensorService) {}
   sensors: Sensor[] = [];
+  sensorEvents: any[] = [];
 
   ngOnInit(): void {
     this.sensorService.getSensors().subscribe(
@@ -41,18 +42,18 @@ export class SensorComponent implements OnInit {
 
     this.sensorForm.setControl('valueMax', new FormControl(sensor.valueMax));
     this.sensorForm.setControl('valueMin', new FormControl(sensor.valueMin));
+
+    this.sensorService.getEvents(sensor._id).subscribe(
+      (data) => {
+        this.sensorEvents = data.data.sensorEvents;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
-  sensorForm = new FormGroup({
-    id: new FormControl(),
-    name: new FormControl(''),
-    location: new FormGroup({
-      latitude: new FormControl(),
-      longitude: new FormControl(),
-    }),
-    valueMax: new FormControl(),
-    valueMin: new FormControl(),
-  });
+  sensorForm = initSensorForm();
 
   onSubmit() {
     if (this.sensorForm.value.id) {
@@ -81,5 +82,45 @@ export class SensorComponent implements OnInit {
           }
         );
     }
+
+    this.sensorForm = initSensorForm();
+    this.sensorSelected = new Sensor();
   }
+
+  onDelete() {
+    if (confirm('Are yo sure you want to delete it?')) {
+      this.sensorService.deleteSensor(this.sensorForm.value.id).subscribe(
+        (data) => {
+          let index = this.sensors.findIndex(
+            (sensor) => sensor._id === this.sensorForm.value.id
+          );
+          console.log(index);
+          this.sensors.splice(index, 1);
+          this.sensorForm = initSensorForm();
+          this.sensorSelected = new Sensor();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  onClear() {
+    this.sensorForm = initSensorForm();
+    this.sensorSelected = new Sensor();
+  }
+}
+
+function initSensorForm() {
+  return new FormGroup({
+    id: new FormControl(),
+    name: new FormControl(''),
+    location: new FormGroup({
+      latitude: new FormControl(),
+      longitude: new FormControl(),
+    }),
+    valueMax: new FormControl(),
+    valueMin: new FormControl(),
+  });
 }
